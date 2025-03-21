@@ -21,7 +21,7 @@ export default function RenderItem({
               {item.title}
             </Text>
             <Text style={item.done ? styles.textTaskDone : styles.text}>
-              {item.date.toLocaleDateString()}
+              {new Date (item.date).toLocaleDateString()} {/*RECONVERTIMOS NUESTRO VALOR DE DATE QUE VIENE DE SER UN STRING POR EL JSON.stringify A UN TIPO DATE*/}
             </Text>
           </TouchableOpacity>
           {//BOTON ELIMINAR TASK
