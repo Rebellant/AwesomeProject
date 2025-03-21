@@ -27,7 +27,7 @@ export default function App() {
   const [tasks, setTasks] = useState<Task[]>([]); //ESPECIFICAMOS A USE STATE QUE VA A SER UN ARRAY DE TAREAS
 
   const addTask = () => {
-    const tmp = [...tasks] //EL OPERADOR DE 3 PUNTOS EN JS "..." NOS PERMITE CREAR UN ARRAY EN UNO QUE YA EXISTE
+    const tmp = [...tasks]; //EL OPERADOR DE 3 PUNTOS EN JS "..." NOS PERMITE CREAR UN ARRAY EN UNO QUE YA EXISTE
     const newTask = {
       title: text,
       done: false,
@@ -37,12 +37,22 @@ export default function App() {
     setTasks(tmp);
     setText('');//LIMPIAMOS EL CAMPO DE TEXTO AL AÑADIR LA TAREA PASANDOLE UN TEXTO VACÍO
   };
-  const markDone = () => {
-    console.log('marked task');
+
+  const markDone = (task:Task) => {
+    const tmp = [...tasks];
+    const index = tmp.findIndex(el => el.title === task.title && el.date === task.date);//finIdex SIRVE PARA BUSCAR ELEMENTOS DENTRO DE LAS LISTAS Y COMPRARALO CON OTRO ELEMENTO, Y POR CADA ELEMENTO QUE HAYA HAREMOS UNA COMPARACIÓN ENTRE EL TITULO ACTUAL DEL ELEMENTO Y EL DE LA TAREA QUE NOS ESTÁN PASANDO ASÍ ENCONTRAREMOS EL INDICE.
+    const todo = tasks[index];
+    todo.done = !todo.done; //INTERCAMBIAMOS VALOR ACTUAL DE done SI ES TRUE CAMBIA A FALSE etc
+    setTasks(tmp);
   };
-  const deleteFunction = () => {
-    console.log('Delete');
+
+  const deleteFunction = (task:Task) => {
+    const tmp = [...tasks];
+    const index = tmp.findIndex(el => el.title === task.title && el.date === task.date);//finIdex SIRVE PARA BUSCAR ELEMENTOS DENTRO DE LAS LISTAS Y COMPRARALO CON OTRO ELEMENTO, Y POR CADA ELEMENTO QUE HAYA HAREMOS UNA COMPARACIÓN ENTRE EL TITULO ACTUAL DEL ELEMENTO Y EL DE LA TAREA QUE NOS ESTÁN PASANDO ASÍ ENCONTRAREMOS EL INDICE.
+    tmp.splice(index,1);
+    setTasks(tmp);
   };
+
   //TARJETAS TAREAS
   return (
     /*INTERFAZ PRINCIPAL*/
